@@ -1,0 +1,6 @@
+description: CS1237 adc driver component
+url: https://github.com/larryli/esp-idf_cs1237
+repository: https://github.com/larryli/esp-idf_cs1237.git
+license: 'MIT'
+dependencies:
+  idf: '>=5.0'
