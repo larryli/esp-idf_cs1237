@@ -1,4 +1,4 @@
-description: 'Get started for CS1237 driver'
+description: 'Get started for CS1237 adc driver'
 dependencies:
   idf: '>=5.0'
   larryli/cs1237:

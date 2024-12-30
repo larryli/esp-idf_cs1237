@@ -16,9 +16,9 @@ struct cs1237_t {
 
 static portMUX_TYPE g_lock = portMUX_INITIALIZER_UNLOCKED;
 
-#define DELAY_US 1
-#define POWER_DOWN_DELAY_US 100
-#define POWER_UP_DELAY_US 10
+#define DELAY_US CONFIG_CS1237_DELAY_US
+#define POWER_DOWN_DELAY_US CONFIG_CS1237_POWER_DOWN_DELAY_US
+#define POWER_UP_DELAY_US CONFIG_CS1237_POWER_UP_DELAY_US
 
 #define WAIT_US_10HZ (305 * 1000)
 #define WAIT_US_40HZ (78 * 1000)
@@ -183,7 +183,6 @@ esp_err_t cs1237_get_config(cs1237_handle_t handle, cs1237_config_t *cfg)
     portEXIT_CRITICAL(&g_lock);
 
     handle->wait_us = get_wait_us(cfg->speed);
-
     ESP_RETURN_ON_FALSE(handle->wait_us < CONFIG_ESP_INT_WDT_TIMEOUT_MS * 1000,
                         ESP_ERR_INVALID_STATE, TAG,
                         "invalid speed config. Please speed up or disable "
@@ -196,8 +195,8 @@ esp_err_t cs1237_set_config(cs1237_handle_t handle, cs1237_config_t cfg)
 {
     ESP_RETURN_ON_FALSE(handle, ESP_ERR_INVALID_ARG, TAG, "invalid handle");
 
-#ifdef CONFIG_ESP_INT_WDT
     uint32_t wait_us = get_wait_us(cfg.speed);
+#ifdef CONFIG_ESP_INT_WDT
     ESP_RETURN_ON_FALSE(wait_us < CONFIG_ESP_INT_WDT_TIMEOUT_MS * 1000,
                         ESP_ERR_INVALID_ARG, TAG,
                         "invalid speed config. Please speed up or disable "

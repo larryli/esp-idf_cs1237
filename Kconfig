@@ -1,0 +1,18 @@
+menu "CS1237 Adc Driver"
+
+    config CS1237_DELAY_US
+        int "CLK delay(us)"
+        range 1 1000
+        default 1
+
+    config CS1237_POWER_DOWN_DELAY_US
+        int "Delay(us) when power down"
+        range 1 1000
+        default 100
+
+    config CS1237_POWER_UP_DELAY_US
+        int "Delay(us) when power up"
+        range 1 1000
+        default 10
+
+endmenu
