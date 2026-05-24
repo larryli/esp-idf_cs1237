@@ -1,18 +1,29 @@
 menu "CS1237 Adc Driver"
 
     config CS1237_DELAY_US
-        int "CLK delay(us)"
+        int "CLK pulse delay (us)"
         range 1 1000
         default 1
+        help
+            Half-period delay for the CLK signal in microseconds.
+            This controls the clock speed of the CS1237 communication.
+            Increase this value if you experience communication errors
+            due to long wire connections or slow GPIO response times.
 
     config CS1237_POWER_DOWN_DELAY_US
-        int "Delay(us) when power down"
+        int "Power-down delay (us)"
         range 1 1000
         default 100
+        help
+            Delay in microseconds after setting CLK HIGH for power-down mode.
+            The CS1237 requires a minimum delay to enter power-down state.
 
     config CS1237_POWER_UP_DELAY_US
-        int "Delay(us) when power up"
+        int "Power-up delay (us)"
         range 1 1000
         default 10
+        help
+            Delay in microseconds after setting CLK LOW to wake from power-down.
+            The CS1237 requires a minimum delay to stabilize after power-up.
 
 endmenu
